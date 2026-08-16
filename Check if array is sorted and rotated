@@ -1,0 +1,93 @@
+Overview:
+Given an array nums, return true if the array was originally sorted in non-decreasing order, then rotated some number of positions (including zero). Otherwise, return false.
+There may be duplicates in the original array.
+Note: An array A rotated by x positions results in an array B of the same length such that B[i] == A[(i+x) % A.length] for every valid index i.
+Example 1:
+Input: nums = [3,4,5,1,2]
+Output: true
+Explanation: [1,2,3,4,5] is the original sorted array.
+You can rotate the array by x = 2 positions to begin on the element of value 3: [3,4,5,1,2].
+
+Approach 1 : Brute Force
+CODE:
+class Solution {
+    public boolean check(int[] nums) {
+        int n=nums.length;
+        int[] checksum=new int[n];
+        for(int rotationoffset=0;rotationoffset<n;rotationoffset++)
+        {
+            int currentindex=0;
+            for(int index=rotationoffset;index<n;index++)
+            {
+                checksum[currentindex++]=nums[index];
+            }
+                for(int index=0;index<rotationoffset;index++)
+                {
+                    checksum[currentindex++]=nums[index];
+                }
+
+            boolean isSorted = true;
+            for(int i=0;i<n-1;i++)
+            {
+                if(checksum[i]>checksum[i+1])
+                {
+                isSorted=false;
+                break;
+            }
+        }
+        if(isSorted)
+        {
+        return true;
+        }
+        
+        }
+        return false;
+    }
+}
+
+Time Complexity = O(n^2)
+Space Complexity = O(n) - since a new array checksum is created 
+
+Explanation:
+A new array is created to store all possible combinations of rotated array and then checked whether the array is sorted or not.
+The outer loop takes care of all the rotated offsets, the next loop pushes they elements till the array end with rotated elements selected as inital and they are pushed into one array. In the next for loop, the elements from the beginning of the original array till the rotated element selected are appened to the array. The second for loop is appended to the third for loop array. Then whether they are sorted or not is checked in the fourth for loop.
+
+Approach 2: Compare with sorted array
+CODE:
+class Solution {
+    public boolean check(int[] nums)
+    {
+        int size=nums.length;
+        int[] sortednums=nums.clone();
+        Arrays.sort(sortednums);
+
+        for(int rotationoffset=0;rotationoffset<size;rotationoffset++)
+        {
+            boolean ismatch=true;
+            for(int index=0;index<size;index++)
+            {
+                if(nums[(rotationoffset+index)%size]!=sortednums[index])
+                {
+                    ismatch=false;
+                    break;
+                }
+                
+
+            }
+            if(ismatch)
+                {
+                    return true;
+                }
+        }
+        return false;
+    }
+}
+
+Time Complexity = O(n^2)
+Space complexity = O(n) - another array sortednums is used.
+
+Explanation:
+In the previous one we took all possible rotated combinations and then performed sort but here we performed sort first and check all possible rotation sequence which matched.
+
+Approach 3: Finding the smallest element and Inversion Method 
+CODE:
