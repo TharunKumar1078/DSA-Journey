@@ -91,3 +91,35 @@ In the previous one we took all possible rotated combinations and then performed
 
 Approach 3: Finding the smallest element and Inversion Method 
 CODE:
+class Solution {
+    public boolean check(int[] nums)
+    {
+        int n=nums.length;
+        if(n<=1)
+        return true;
+        int inversioncount=0;
+        for(int i=1;i<n;i++)
+        {
+            if(nums[i]<nums[i-1])
+            {
+                ++inversioncount;
+            }
+        }
+        if(nums[0]<nums[n-1])
+        {
+            inversioncount++;
+        }
+        if(inversioncount>1)
+        {
+            return false;
+        }
+    return true;
+    }    
+}
+
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+Explanation:
+
+Here the Inversion Element(smallest element next to a greater elements eg: 4, 1) is used to find whether the array is sorted and rotated. In a sorted array which is rotated there will be only one inversion element so we are using this trick to solve and get the best approach. Also remember this can be used only for ascending to descending sorted array.
