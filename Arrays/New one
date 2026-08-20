@@ -1,1 +1,49 @@
-Hello i will complete now
+Exactly. IEEE is not a requirement from your sir; you want IEEE because it gives you confidence that the paper is established and genuine. That's a reasonable preference.
+
+In that case, I would not force you to use IEEE if we already have a strong non-IEEE journal paper that meets your actual technical requirements.
+
+I would stick with the DPL paper
+
+DPL-based novel CMOS 1-Trit Ternary Full-Adder
+International Journal of Electronics, Taylor & Francis, Vol. 108, Issue 2, 2021, pp. 218–236. DOI: 10.1080/00207217.2020.1789759.
+
+And importantly, this isn't just a paper that sounds suitable. The publisher's own abstract explicitly confirms:
+
+T-Spice transient simulation
+TSMC 65 nm physical design
+DRC
+LVS
+parasitic extraction
+post-layout simulation
+PVT analysis
+
+So it hits your sir's actual checklist extremely well.
+
+And it has credible authors
+
+One of the authors, Dipankar Pal, is from BITS Pilani, Goa, while the other authors are from Dr. B. C. Roy Engineering College. BITS Pilani's own publication list records this exact paper in the International Journal of Electronics.
+
+The B.C. Roy Engineering College publication records also list it as a journal publication with a DOI.
+
+So I wouldn't consider this a "random low-quality journal paper."
+
+About your 12-hour target
+
+Here's where I'd be realistic.
+
+If your goal is to reproduce only the core work required by your sir, rather than every single experiment in the paper:
+
+~12 hours can be possible
+
+1. Understand paper + circuit — 1 hr
+2. Build schematic — 2 hr
+3. Transient simulation — 1 hr
+4. Layout — 3 hr
+5. DRC + fixes — 1 hr
+6. LVS + fixes — 1 hr
+7. PEX — 1 hr
+8. Post-layout simulation + comparison — 2 hr
+
+Total ≈ 12 hours
+
+But this assumes your EDA environment/PDK is already working. The biggest risk isn't the circuit itself; it's getting the technology files, layout rules, LVS setup and extraction flow working.
