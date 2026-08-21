@@ -1,0 +1,113 @@
+Given two sorted arrays a[] and b[], where each array may contain duplicate elements , the task is to return the elements in the union of the two arrays in sorted order.
+Union of two arrays can be defined as the set containing distinct common elements that are present in either of the arrays.
+
+Examples:
+
+Input: a[] = [1, 2, 3, 4, 5], b[] = [1, 2, 3, 6, 7]
+Output: [1, 2, 3, 4, 5, 6, 7]
+Explanation: Distinct elements including both the arrays are: 1 2 3 4 5 6 7.
+Input: a[] = [2, 2, 3, 4, 5], b[] = [1, 1, 2, 3, 4]
+Output: [1, 2, 3, 4, 5]
+Explanation: Distinct elements including both the arrays are: 1 2 3 4 5.
+Input: a[] = [1, 1, 1, 1, 1], b[] = [2, 2, 2, 2, 2]
+Output: [1, 2]
+Explanation: Distinct elements including both the arrays are: 1 2.
+
+Approach 1:(Brute Force)
+CODE:
+
+class Solution {
+    public static ArrayList<Integer> findUnion(int a[], int b[]) {
+
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        for (int i = 0; i < a.length; i++) {
+            if (!ans.contains(a[i])) {
+                ans.add(a[i]);
+            }
+        }
+
+        for (int i = 0; i < b.length; i++) {
+            if (!ans.contains(b[i])) {
+                ans.add(b[i]);
+            }
+        }
+
+        Collections.sort(ans);
+
+        return ans;
+    }
+}
+Complexity:
+Time = O((n + m)²);
+Space = O(n + m);
+Output does not run aslo it takes long time
+
+
+Approach 2: (HashSet)
+class Solution {
+    public static ArrayList<Integer> findUnion(int a[], int b[]) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int x : a) {
+            set.add(x);
+        }
+        for (int x : b) {
+            set.add(x);
+        }
+        ArrayList<Integer> ans = new ArrayList<>(set);
+        Collections.sort(ans);
+        return ans;
+    }
+}
+
+Complexity:
+Time = O(n + m);
+Space =O(n + m);
+Approach 3: (Two pointer (Best)
+CODE:
+
+class Solution {
+    public static ArrayList<Integer> findUnion(int a[], int b[]) {
+        ArrayList<Integer> ans=new ArrayList<>();
+        int i=0;
+        int j=0;
+        while(i<a.length &&j<b.length)
+        {
+            if(a[i]<b[j])
+            {
+                if(ans.size()==0 || ans.get(ans.size()-1)!=a[i])
+                    ans.add(a[i]);
+                    i++;
+            }
+            else if(b[j]<a[i])
+            {
+                if(ans.size()==0 || ans.get(ans.size()-1)!=b[j])
+                    ans.add(b[j]);
+                    j++;
+            }
+            else{
+                if(ans.size()==0 || ans.get(ans.size()-1)!=a[i])
+                    ans.add(a[i]);
+                    i++;
+                    j++;
+            }
+        }
+        while(i<a.length)
+        {
+            if(ans.size()==0 || ans.get(ans.size()-1)!=a[i])
+                ans.add(a[i]);
+                i++;
+        }
+        while(j<b.length)
+        {
+            if(ans.size()==0 || ans.get(ans.size()-1)!=b[j])
+                ans.add(b[j]);
+                j++;
+        }
+        return ans;
+}
+}
+Complexity:
+Time = O(n+m); (done by two pointers i and j)
+Space = O(n+m); (ans which is sum of a+b elements)
+Auxillary = O(1); (i,j)
