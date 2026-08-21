@@ -18,21 +18,17 @@ CODE:
 
 class Solution {
     public static ArrayList<Integer> findUnion(int a[], int b[]) {
-
         ArrayList<Integer> ans = new ArrayList<>();
-
         for (int i = 0; i < a.length; i++) {
             if (!ans.contains(a[i])) {
                 ans.add(a[i]);
             }
         }
-
         for (int i = 0; i < b.length; i++) {
             if (!ans.contains(b[i])) {
                 ans.add(b[i]);
             }
         }
-
         Collections.sort(ans);
 
         return ans;
@@ -41,7 +37,7 @@ class Solution {
 Complexity:
 Time = O((n + m)²);
 Space = O(n + m);
-Output does not run aslo it takes long time
+Output does not run also it takes long time because of ans.contains() -> this check all elements one by one whether they are there are not.
 
 
 Approach 2: (HashSet)
@@ -63,6 +59,8 @@ class Solution {
 Complexity:
 Time = O(n + m);
 Space =O(n + m);
+
+
 Approach 3: (Two pointer (Best)
 CODE:
 
@@ -111,3 +109,5 @@ Complexity:
 Time = O(n+m); (done by two pointers i and j)
 Space = O(n+m); (ans which is sum of a+b elements)
 Auxillary = O(1); (i,j)
+
+Best because sorting already done unlike hashset we won't sorting again and waste time.
