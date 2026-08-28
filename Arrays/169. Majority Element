@@ -1,0 +1,87 @@
+Given an array nums of size n, return the majority element.
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+Example 1:
+Input: nums = [3,2,3]
+Output: 3
+
+Example 2:
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+
+Approach 1:(Brute Force)
+class Solution {
+    public int majorityElement(int[] nums) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (nums[i] == nums[j]) {
+                    count++;
+                }
+            }
+            if (count > n / 2) {
+                return nums[i];
+            }
+        }
+        return -1;
+    }
+}
+
+Complexity:
+Time = O(n^2);
+Space = O(1);
+
+Approach 3:(Arrays.sort)
+import java.util.Arrays;
+class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+}
+
+Complexity:
+Time = O(nlogn);
+Space = O(logn);
+
+Aprroach 2:(HashMap)
+import java.util.HashMap;
+class Solution {
+    public int majorityElement(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int x : nums) {
+            map.put(x, map.getOrDefault(x, 0) + 1);
+            if (map.get(x) > nums.length / 2) {
+                return x;
+            }
+        }
+        return -1;
+    }
+}
+
+Complexity:
+Time = O(n);
+Space = O(n);
+
+Approach 4:(Boyer-Moore Voting Algo)(Optimal)
+class Solution {
+    public int majorityElement(int[] nums) {
+        int candidate = 0;
+        int count = 0;
+        for (int x : nums) {
+            if (count == 0) {
+                candidate = x;
+            }
+            if (x == candidate) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        return candidate;
+    }
+}
+
+Complexity:
+Time = O(n);
+Space = O(1);
