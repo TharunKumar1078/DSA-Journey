@@ -11,12 +11,31 @@ Input: prices = [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transactions are done and the max profit = 0.
 
-Approach 1:()
+Approach 1:(Brute Force)
+class Solution {
+    public int maxProfit(int[] prices) {
+        int maxProfit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            for (int j = i + 1; j < prices.length; j++) {
+                int profit = prices[j] - prices[i];
+                if (profit > maxProfit) {
+                    maxProfit = profit;
+                }
+            }
+        }
+        return maxProfit;
+    }
+} 
+
+Complexity:
+Time = O(n^2);
+Space = O(1);
+
+Approach 2:(One pass)(Optimal)
 class Solution {
     public int maxProfit(int[] prices) {
         int min = prices[0];
         int maxProfit = 0;
-
         for (int i = 1; i < prices.length; i++) {
             if (prices[i] < min) {
                 min = prices[i];
@@ -24,11 +43,32 @@ class Solution {
                 maxProfit = Math.max(maxProfit, prices[i] - min);
             }
         }
-
         return maxProfit;
     }
 }
 
 Complexity:
-Time = O();
-Space = O();
+Time = O(n);
+Space = O(1);
+
+Approach 3:(One pass but with if else)(Optimal)
+class Solution {
+    public int maxProfit(int[] prices) {
+        int min = prices[0];
+        int profit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < min) {
+                min = prices[i];
+            }
+            int currentProfit = prices[i] - min;
+            if (currentProfit > profit) {
+                profit = currentProfit;
+            }
+        }
+        return profit;
+    }
+}
+
+Complexity:
+Time = O(n)
+Space = O(1)
